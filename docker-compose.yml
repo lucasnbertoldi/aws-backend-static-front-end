@@ -1,0 +1,42 @@
+version: "3.3"
+services:
+    terraform-version:
+        image: hashicorp/terraform:latest
+        volumes:
+            - "./${FOLDER}/:/project"
+            - "./modules:/modules"
+            - "./front-end:/front-end"
+        entrypoint: terraform -chdir=/project -v 
+        user: "${EXEC_USER}:${EXEC_GROUP}"
+    terraform-init:
+        image: hashicorp/terraform:latest
+        volumes:
+            - "./${FOLDER}/:/project"
+            - "./modules:/modules"
+            - "./front-end:/front-end"
+        entrypoint: terraform -chdir=/project init
+        user: "${EXEC_USER}:${EXEC_GROUP}"
+    terraform-plan:
+        image: hashicorp/terraform:latest
+        volumes:
+            - "./${FOLDER}/:/project"
+            - "./modules:/modules"
+            - "./front-end:/front-end"
+        entrypoint: terraform -chdir=/project plan 
+        user: "${EXEC_USER}:${EXEC_GROUP}"
+    terraform-apply:
+        image: hashicorp/terraform:latest
+        volumes:
+            - "./${FOLDER}/:/project"
+            - "./modules:/modules"
+            - "./front-end:/front-end"
+        entrypoint: terraform -chdir=/project apply -auto-approve
+        user: "${EXEC_USER}:${EXEC_GROUP}"
+    terraform-destroy:
+        image: hashicorp/terraform:latest
+        volumes:
+            - "./${FOLDER}/:/project"
+            - "./modules:/modules"
+            - "./front-end:/front-end"
+        entrypoint: terraform -chdir=/project destroy -auto-approve
+        user: "${EXEC_USER}:${EXEC_GROUP}"

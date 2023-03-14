@@ -1,0 +1,5 @@
+/front-end/
+/main/auth.tf
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate.backup
