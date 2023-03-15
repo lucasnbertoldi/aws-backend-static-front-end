@@ -12,6 +12,15 @@ e esse projeto adere [Semantic Versioning](http://semver.org/).
  
 ### Fixed
 
+## [0.0.2] - 2023-03-14
+
+### Changed
+
+**Makefile**
+- Execução do main por padrão.
+- Módulos podendo ser especificados pela varíavel **module**.
+- Variáveis do usuário (**exec_user_code**) e grupo (**exec_user_group**).
+
 ## [0.0.1] - 2023-03-13
 
 ### Added
