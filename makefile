@@ -1,5 +1,5 @@
 
-env="FOLDER=$(if $(module),modules/$(module),main)\nEXEC_USER=$(if $(exec_user_code),$(exec_user_code),1000)\nEXEC_GROUP=$(if $(exec_user_group),$(exec_user_group),1000)"
+env="FOLDER=$(if $(module),modules/$(module),main)\nEXEC_USER=$(if $(exec_user_code),$(exec_user_code),1000)\nEXEC_GROUP=$(if $(exec_group_code),$(exec_group_code),1000)"
 
 v:
 	echo $(env) > .env

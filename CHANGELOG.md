@@ -19,7 +19,7 @@ e esse projeto adere [Semantic Versioning](http://semver.org/).
 **Makefile**
 - Execução do main por padrão.
 - Módulos podendo ser especificados pela varíavel **module**.
-- Variáveis do usuário (**exec_user_code**) e grupo (**exec_user_group**).
+- Variáveis do usuário (**exec_user_code**) e grupo (**exec_group_code**).
 
 ## [0.0.1] - 2023-03-13
 
