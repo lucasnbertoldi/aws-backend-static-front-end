@@ -30,35 +30,22 @@ resource "aws_route_table" "table_route" {
 }
 
 
-resource "aws_subnet" "subnet_1" {
+resource "aws_subnet" "subnet" {
+  count = length(var.zones)
+
   vpc_id     = aws_vpc.vpc.id
-  cidr_block = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
+  cidr_block = "10.0.${count.index}.0/24"
+  availability_zone = var.zones[count.index]
 
   tags = {
-    Name = join("-", [var.env, var.id, "subnet-1"])
+    Name = join("-", [var.env, var.id, "subnet-${count.index}"])
     Environment = var.env
   }
 }
 
-resource "aws_subnet" "subnet_2" {
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = "10.0.2.0/24"
-  availability_zone = "us-east-1b"
-
-  tags = {
-    Name = join("-", [var.env, var.id, "subnet-2"])
-    Environment = var.env
-  }
-}
-
-resource "aws_route_table_association" "subnet_1_association" {
-  subnet_id      = aws_subnet.subnet_1.id
-  route_table_id = aws_route_table.table_route.id
-}
-
-resource "aws_route_table_association" "subnet_2_association" {
-  subnet_id      = aws_subnet.subnet_2.id
+resource "aws_route_table_association" "subnet_association" {
+  count = length(var.zones)
+  subnet_id      = aws_subnet.subnet[count.index].id
   route_table_id = aws_route_table.table_route.id
 }
 
@@ -90,9 +77,9 @@ resource "aws_security_group" "lb_security_group" {
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
-    description      = "TLS from VPC on 80"
-    from_port        = 80
-    to_port          = 80
+    description      = "TLS from VPC on 443"
+    from_port        = 443
+    to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]

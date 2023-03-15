@@ -2,7 +2,7 @@ resource "aws_launch_template" "launch_template" {
   name = join("-", [var.env, var.id, "launch_template"])
   vpc_security_group_ids = [aws_security_group.e2c_application_security_group.id]
 
-  image_id = data.aws_ami.java_11_tomcat_9_ami.id
+  image_id = var.ami_id
 
   instance_type = var.e2c_application_instance_type
 
@@ -27,48 +27,6 @@ resource "aws_launch_template" "launch_template" {
   }
 }
 
-resource "aws_lb" "lb" {
-  name               = join("-", [var.env, var.id, "lb"])
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.lb_security_group.id]
-  subnets            = [aws_subnet.subnet_1.id, aws_subnet.subnet_2.id]
-
-  tags = {
-    Environment = "production"
-  }
-}
-
-resource "aws_lb_target_group" "target_group" {
-  name        = join("-", [var.env, var.id, "lb-target-group"])
-  port        = 8080
-  protocol    = "HTTP"
-  vpc_id      = aws_vpc.vpc.id
-
-  health_check {
-    interval            = 30
-    path                = "/"
-    port                = 8080
-    healthy_threshold   = 5
-    unhealthy_threshold = 2
-    timeout             = 5
-    protocol            = "HTTP"
-    matcher             = "200"
-  }
-}
-
-resource "aws_lb_listener" "listener" {
-  load_balancer_arn = aws_lb.lb.arn
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.target_group.arn
-  }
-  
-}
-
 resource "aws_placement_group" "placement" {
   name     = join("-", [var.env, var.id, "placement-group"])
   strategy = "spread"
@@ -87,7 +45,7 @@ resource "aws_autoscaling_group" "autoscaling" {
   force_delete              = true
 
   placement_group           = aws_placement_group.placement.id
-  vpc_zone_identifier       = [aws_subnet.subnet_1.id, aws_subnet.subnet_2.id]
+  vpc_zone_identifier       = aws_subnet.subnet[*].id
 
   launch_template {
     id      = aws_launch_template.launch_template.id
@@ -110,6 +68,6 @@ resource "aws_autoscaling_policy" "policy" {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
 
-    target_value = 80.0
+    target_value = var.auto_scaling_cpu_percentage
   }
 }

@@ -12,6 +12,17 @@ e esse projeto adere [Semantic Versioning](http://semver.org/).
  
 ### Fixed
 
+## [0.0.3] - 2023-03-15
+
+### Added
+- Domínio, redirecionamento e certificado para load balancer.
+- Possibilidade de declaração de múltiplas zonas por meio de lista no auto scalling.
+- Declaração direta no arquivo main para algumas variáveis referentes ao auto scalling.
+
+### Changed
+- Criação de um módulo front-end para chamar os módulos site-s3 e certificate.
+- Movendo arquivos para módulo auto-scaling com a criação da rede, grupos, load balancer e auto scalling.
+
 ## [0.0.2] - 2023-03-14
 
 ### Changed

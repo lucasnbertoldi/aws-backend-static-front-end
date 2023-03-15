@@ -4,6 +4,8 @@
 resource "aws_s3_bucket" "site_bucket" {
   bucket = join("-", [var.env, var.id, "site"])
 
+  force_destroy = true
+
   tags = {
     Environment = var.env
   }

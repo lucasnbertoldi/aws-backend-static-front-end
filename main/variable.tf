@@ -27,15 +27,3 @@ variable "ami_e2c_application_name" {
     type = string
     default = "java-11-tomcat-9"
 }
-
-variable "e2c_application_instance_type" {
-    description = "Máquina que rodará as instâncias"
-    type = string
-    default = "t3a.micro"
-}
-
-variable "e2c_application_volume_size" {
-    description = "Quantidade de gigas de armazenamento da instância"
-    type = number
-    default = 8
-}
