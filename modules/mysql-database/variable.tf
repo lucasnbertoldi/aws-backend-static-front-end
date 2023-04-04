@@ -23,34 +23,36 @@ variable "env" {
     type = string
 }
 
-variable "domain" {
-    description = "Domínio que será hospedado o site"
-    type = string
-}
-
-variable "route_53_zone_id" {
-    description = "Id da zona do registro do Route53 onde o domínio está hospedado"
-    type = string
-}
-
-variable "e2c_application_instance_type" {
-    description = "Máquina que rodará as instâncias"
-    type = string
-}
-
-variable "e2c_application_volume_size" {
-    description = "Quantidade de gigas de armazenamento da instância"
+variable "storage" {
+    description = "Valor do armazenamento em GB"
     type = number
 }
 
-variable "ami_id" {
-    description = "O id da ami que ira executar no auto scaling"
+variable "max_storage" {
+    description = "Valor do armazenamento em GB caso seja preciso aumentar"
+    type = number
+}
+
+variable "user_name" {
+    description = "Nome do usuário do banco de dados"
+    type = string
+    default = "admin"
+}
+
+variable "password" {
+    description = "Senha de administrador para o banco de dados"
     type = string
 }
 
-variable "auto_scaling_cpu_percentage" {
-    description = "Qual o uso do CPU que vai gerar a criação de outra instância"
+variable "mysql_version" {
+    description = "Versão do mysql que será executada"
     type = number
+    default = 5
+}
+
+variable "database_instance_type" {
+    description = "A instância que irá rodar o mysql"
+    type = string
 }
 
 variable "vpc" {
@@ -61,11 +63,6 @@ variable "vpc" {
 variable "zones" {
     description = "Regiões que o auto scalling irá escalar"
     type = list(string)
-}
-
-variable "gw_table_route" {
-    description = "A rota do gateway da internet"
-    type = any
 }
 
 variable "start_network_number" {

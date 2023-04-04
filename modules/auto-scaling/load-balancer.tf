@@ -11,7 +11,7 @@ module "certificate" {
 
 resource "aws_lb" "lb" {
   name               = join("-", [var.env, var.id, "lb"])
-  internal           = true
+  internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_security_group.id]
   subnets            = aws_subnet.subnet[*].id
@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "target_group" {
   name        = join("-", [var.env, var.id, "lb-target-group"])
   port        = 8080
   protocol    = "HTTP"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = var.vpc.id
 
   health_check {
     interval            = 30

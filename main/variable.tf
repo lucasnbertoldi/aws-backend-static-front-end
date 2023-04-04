@@ -13,13 +13,13 @@ variable "aws_region" {
 variable "domain" {
     description = "Domínio principal da estrutura"
     type = string
-    default = "test.arguschef.com.br"
+    default = "domain.com"
 }
 
 variable "id" {
     description = "ID da Estrutura"
     type = string
-    default = "argus-chef"
+    default = "app-name"
 }
 
 variable "ami_e2c_application_name" {
