@@ -17,6 +17,7 @@ e esse projeto adere [Semantic Versioning](http://semver.org/).
 ### Added
 - Módulo do mysql com serviço com multi-az funcionando em duas subnets sem a conexão com a internet.
 - Módulo network para criação da VPC e Gateway.
+- Readme do projeto.
 
 ### Changed
 - Remoção da criação das subnets do autoscaling pelo módulo network. A criação é realizada pelo próprio módulo de autoscaling. 
