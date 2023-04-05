@@ -12,6 +12,11 @@ e esse projeto adere [Semantic Versioning](http://semver.org/).
  
 ### Fixed
 
+## [0.0.5] - 2023-04-05
+
+### Added
+- Adicionando imagem da estrutura no backend.
+
 ## [0.0.4] - 2023-04-04
 
 ### Added

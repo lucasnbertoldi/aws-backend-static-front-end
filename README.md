@@ -1,5 +1,7 @@
 # Estrutura Terraform AWS - Backend + Frontend Estático
 
+![Estrutura](https://github.com/lucasnbertoldi/aws-backend-static-front-end/blob/main/sctructure.png)
+
 [Histórico de Mudanças](https://github.com/lucasnbertoldi/aws-terraform-angular-java-mysql/blob/main/CHANGELOG.md)
 
 ## Especificações
